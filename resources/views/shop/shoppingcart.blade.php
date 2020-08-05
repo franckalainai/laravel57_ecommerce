@@ -18,7 +18,8 @@
                 @foreach($products as $key => $p)
                     <div class="col-lg-3 col-md-3 col-sm-12">
 
-                        <form action="#" method="post">
+                        <form action="{{route('cart.add', $p->id)}}" method="post">
+                        {{ csrf_field() }}
 
                             <h6 class="card-title bg-info text-white p-2 text-uppercase">{{$p->product_name}}</h6>
 

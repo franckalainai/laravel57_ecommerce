@@ -11,16 +11,23 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 @foreach($categories as $key => $c)
+
+                <?php $i=0; ?>
                 <li class="nav-item dropdown">
                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                         {{$c->category_name}}<span class="caret"></span>
                     </a>
                         @if($c->products->count()!=0)
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <div class="dropdown-menu scrollable-menu" aria-labelledby="navbarDropdown">
                             @foreach($c->products as $key => $p)
-                                <a class="dropdown-item" href="">
-                                    {{$p->product_name}}
-                                </a>
+
+                            <?php ++$i; ?>
+                                <a class="dropdown-item" href="">{{$p->product_name}}</a>
+                                <i class="fa fa-toggle-right"></i>
+                                    <?php echo $i < $c->products->count() ?
+                                    '<div class="dropdown-divider"></div>' : null ?>
+
                             @endforeach
                             </div>
                         @endif
@@ -39,9 +46,9 @@
             <ul class="navbar-nav ml-auto">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{{route('cart.read')}}">
                         <i class="fa fa-shopping-cart"> Shopping cart</i>
-                        <span class="badge badge-danger">100</span>
+                        <span class="badge badge-danger">{{Cart::count()}}</span>
                     </a>
                 </li>
 

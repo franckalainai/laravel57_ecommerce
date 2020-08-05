@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', 'FrontEndController@index')->name('shop.cart.index');
-Route::get('/cart', 'CartController@listCart')->name('cart.list');
-
+Route::match(['get', 'post'],'/cart/add/{id?}', 'CartController@addCart')->name('cart.add');
+Route::get('/cart/read', 'CartController@readCart')->name('cart.read');
+Route::post('/cart/update', 'CartController@updateCart')->name('cart.update');
 
 
 Auth::routes();
