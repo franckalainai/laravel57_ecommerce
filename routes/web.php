@@ -17,6 +17,11 @@ Route::get('/', 'FrontEndController@index')->name('shop.cart.index');
 Route::match(['get', 'post'],'/cart/add/{id?}', 'CartController@addCart')->name('cart.add');
 Route::get('/cart/read', 'CartController@readCart')->name('cart.read');
 Route::post('/cart/update', 'CartController@updateCart')->name('cart.update');
+Route::get('/cart/remove/{rowId}', 'CartController@removeCart')->name('cart.remove');
+Route::resource('/checkout', 'CheckoutController');
+Route::get('/thank', function(){
+    return view('thanks.index');
+})->name('thank');
 
 
 Auth::routes();

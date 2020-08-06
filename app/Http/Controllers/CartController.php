@@ -25,4 +25,9 @@ class CartController extends Controller
         Cart::update(request()->rowId, request()->qty);
         return back();
     }
+
+    public function removeCart($rowId){
+        Cart::remove($rowId);
+        return back();
+    }
 }

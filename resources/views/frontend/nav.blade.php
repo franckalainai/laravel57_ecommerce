@@ -24,7 +24,7 @@
 
                             <?php ++$i; ?>
                                 <a class="dropdown-item" href="">{{$p->product_name}}</a>
-                                <i class="fa fa-toggle-right"></i>
+                                <!--<i class="fa fa-toggle-right"></i>-->
                                     <?php echo $i < $c->products->count() ?
                                     '<div class="dropdown-divider"></div>' : null ?>
 
@@ -47,7 +47,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('cart.read')}}">
-                        <i class="fa fa-shopping-cart"> Shopping cart</i>
+                        <i class="fa fa-shopping-cart"> Cart</i>
                         <span class="badge badge-danger">{{Cart::count()}}</span>
                     </a>
                 </li>
