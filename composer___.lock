@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "335779b9cac72a162a4a5778a36f35af",
+    "content-hash": "bb0df612a59c4f40648bf60cc9cfbbbb",
     "packages": [
         {
             "name": "cartalyst/stripe",
@@ -94,20 +94,20 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "1.4.0",
+            "version": "1.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "ab5de36233a1995f9c776c741b803eb8207aebef"
+                "reference": "4650c8b30c753a76bf44fb2ed00117d6f367490c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/ab5de36233a1995f9c776c741b803eb8207aebef",
-                "reference": "ab5de36233a1995f9c776c741b803eb8207aebef",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/4650c8b30c753a76bf44fb2ed00117d6f367490c",
+                "reference": "4650c8b30c753a76bf44fb2ed00117d6f367490c",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2"
+                "php": "^7.2 || ^8.0"
             },
             "require-dev": {
                 "doctrine/coding-standard": "^7.0",
@@ -182,7 +182,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-06T11:01:57+00:00"
+            "time": "2020-05-29T07:19:59+00:00"
         },
         {
             "name": "doctrine/lexer",
@@ -6416,7 +6416,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.2.19"
+        "php": "^7.1.3"
     },
     "platform-dev": [],
     "plugin-api-version": "1.1.0"

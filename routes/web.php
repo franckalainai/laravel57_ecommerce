@@ -48,3 +48,11 @@ Route::match(['get', 'post'],'/status/create', 'ManageController@createStatus')-
 Route::get('/status/edit/{id}', 'ManageController@editStatus')->name('status.edit');
 Route::post('/status/store', 'ManageController@storeStatus')->name('status.store');
 Route::get('/status/destroy/{id}', 'ManageController@destroyStatus')->name('status.destroy');
+
+
+//---------Customer route-----------
+Route::prefix('customer')->namespace('Customer')->group(function(){
+    Route::get('/home', 'CustomerController@index')->name('customer.home');
+    Route::get('/login', 'CustomerloginController@showLoginForm')->name('customer.login');
+    Route::post('/login', 'CustomerloginController@login');
+});
