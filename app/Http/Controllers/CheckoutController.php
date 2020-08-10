@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Cartalyst\Stripe\Stripe;
+use App\Model\ShippingAddress;
+use App\Model\Order;
+use App\Model\OrderItem;
 use Cart;
 
 class CheckoutController extends Controller
@@ -13,10 +16,25 @@ class CheckoutController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    protected $customer;
+
+    public function __construct()
+    {
+        $this->middleware('auth:customer')->except('index');
+    }
+
     public function index()
     {
-        $carts = Cart::content();
-        return view('checkout.index')->with(compact('carts'));
+        if(auth()->guard('customer')->check()){
+            $c = auth()->guard('customer')->user(); //c = customer
+            $carts = Cart::content();
+            return view('checkout.index')->with(compact('carts', 'c'));
+        }else{
+            session()->put('checkout_url', 'checkout.index');
+            return redirect()->route('customer.login');
+        }
+
     }
 
     /**
@@ -39,7 +57,7 @@ class CheckoutController extends Controller
     {
         try{
             $stripe = new Stripe('sk_test_ekHEsZ0D6wMLcJGkenE3PORZ00MGL1bZSp');
-            $charges = $stripe->charges()->create([
+            $charge = $stripe->charges()->create([
 
                 'amount' => Cart::total(),
                 'currency' => 'USD',
@@ -48,8 +66,35 @@ class CheckoutController extends Controller
                 'receipt_email' => $request->email
             ]);
 
-            if($charges){
-                Cart::destroy();
+            if($charge){
+                $this->customer = auth()->guard('customer')->user();
+
+                $order = new Order;
+                $order->customer_id = $this->customer->id;
+                $order->payment_id = 11;
+                $order->status_id = 1;
+
+                if($order->save()){
+
+                    foreach(Cart::content() as $key => $cart){
+                        $item = new OrderItem;
+                        $item->order_id = $order->id;
+                        $item->product_id = $cart->id;
+                        $item->color_id = 1;
+                        $item->price = $cart->price;
+                        $item->qty = $cart->qty;
+                        $item->amount = $cart->total;
+                        $item->save();
+                    }
+                    $request->merge([
+                        'customer_id' => $this->customer->id,
+                        'order_id' => $order->id
+                    ]);
+
+                    if(ShippingAddress::create($request->all())){
+                        Cart::destroy();
+                    }
+                }
                 return redirect()->route('thank');
             }
 

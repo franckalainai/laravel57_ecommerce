@@ -55,4 +55,5 @@ Route::prefix('customer')->namespace('Customer')->group(function(){
     Route::get('/home', 'CustomerController@index')->name('customer.home');
     Route::get('/login', 'CustomerloginController@showLoginForm')->name('customer.login');
     Route::post('/login', 'CustomerloginController@login');
+    Route::post('/logout', 'CustomerloginController@logout')->name('customer.logout');
 });

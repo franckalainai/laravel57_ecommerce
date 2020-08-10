@@ -56,35 +56,35 @@
                 <form action="{{route('checkout.store')}}" method="post" id="payment-form">
                 @csrf
                     <div class="form-group">
-                        <input type="text" name="name" class="form-control"  placeholder="Name">
+                    <input type="text" name="name" value="{{$c->customer_name}}" class="form-control"  placeholder="Name">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name="email" class="form-control"  placeholder="Email">
+                        <input type="text" name="email" value="{{$c->email}}" class="form-control"  placeholder="Email">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name="phone" class="form-control" placeholder="Phone">
+                        <input type="text" name="phone" value="{{$c->phone}}" class="form-control" placeholder="Phone">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name="City" class="form-control" placeholder="City">
+                        <input type="text" name="City" value="{{$c->city}}" class="form-control" placeholder="City">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name="district" class="form-control" placeholder="District">
+                        <input type="text" name="district" value="{{$c->district}}" class="form-control" placeholder="District">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name="commune" class="form-control" placeholder="Commune">
+                        <input type="text" name="commune" value="{{$c->commune}}" class="form-control" placeholder="Commune">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name="postcode" class="form-control" placeholder="Post Code">
+                        <input type="text" name="postcode" value="{{$c->code}}" class="form-control" placeholder="Post Code">
                     </div>
 
                     <div class="form-group">
-                        <input type="text" name="village" class="form-control" placeholder="Village">
+                        <input type="text" name="village" value="{{$c->village}}" class="form-control" placeholder="Village">
                     </div>
 
                     <div class="form-group">

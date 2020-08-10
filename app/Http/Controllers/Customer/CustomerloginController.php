@@ -18,6 +18,7 @@ class CustomerloginController extends Controller
     | to conveniently provide its functionality to your applications.
     |
     */
+    protected $url;
 
     use AuthenticatesUsers;
 
@@ -50,7 +51,14 @@ class CustomerloginController extends Controller
         ]);
 
         if(auth()->guard('customer')->attempt(['email' => $r->email, 'password' => $r->password], $r->remember)){
-            return redirect()->intended(route('customer.home'));
+            if(session()->has('checkout_url')){
+                $this->url = 'checkout.index';
+                session()->forget('checkout_url');
+            }else{
+                $this->url = 'customer.home';
+            }
+
+            return redirect()->intended(route($this->url));
         }
 
         return redirect()->back()->withErrors($r->only('email', 'remember'));
